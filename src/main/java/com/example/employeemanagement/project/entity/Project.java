@@ -1,5 +1,4 @@
 package com.example.employeemanagement.project.entity;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,5 +25,6 @@ public class Project {
     private String clientAddress;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String projectStatus;
 
 }

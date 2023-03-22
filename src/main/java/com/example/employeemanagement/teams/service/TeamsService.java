@@ -16,8 +16,9 @@ public class TeamsService {
     public Teams addTeam(Teams teams){
         return teamRepo.save(teams);
     }
-    public List<Teams> findAllTeam(){
-        return teamRepo.findAll();
+    public List<Teams> findAllTeam(Long id){
+
+        return teamRepo.findByProjectId(id);
     }
     public Teams findById(Long id){
         return teamRepo.findById(id).orElseThrow(() -> new EntityNotFound("skill not found " + id));

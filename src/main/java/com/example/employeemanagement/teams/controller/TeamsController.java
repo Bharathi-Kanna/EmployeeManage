@@ -1,6 +1,5 @@
 package com.example.employeemanagement.teams.controller;
 
-import com.example.employeemanagement.project.entity.Project;
 import com.example.employeemanagement.teams.entity.Teams;
 import com.example.employeemanagement.teams.service.TeamsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teams")
+@CrossOrigin
 public class TeamsController {
     @Autowired
     TeamsService teamsService;
-    @GetMapping("/findAll")
-    public ResponseEntity<List<Teams>> findAllTeam() {
-        return new ResponseEntity<>(teamsService.findAllTeam(), HttpStatus.OK);
+    @GetMapping("/findAll/{id}")
+    public ResponseEntity<List<Teams>> findAllTeam(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(teamsService.findAllTeam(id), HttpStatus.OK);
     }
     @GetMapping("/findById/{id}")
     public ResponseEntity<Teams> findTeamById(@PathVariable("id") Long id){
