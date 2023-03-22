@@ -91,7 +91,8 @@ public class EmployeeService implements EmployeeServiceInterface  {
 
     @Override
     public Employee addEntity(Employee employee){
-        employee.getPayroll().setTotalSalary(employee.getPayroll().getSalary()+employee.getPayroll().getBonus());
+       if(!(employee.getPayroll()==null))
+           employee.getPayroll().setTotalSalary(employee.getPayroll().getSalary()+employee.getPayroll().getBonus());
         return employeeRepo.save(employee);
     }
 
