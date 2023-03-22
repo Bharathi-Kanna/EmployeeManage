@@ -1,10 +1,9 @@
 package com.example.employeemanagement.employee.entity;
 
-import com.example.employeemanagement.employeeproject.entity.EmployeeProject;
 import com.example.employeemanagement.payroll.entity.Payroll;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +30,6 @@ public class Employee {
     private String phoneNumber;
     @Column(name="emp_experience")
     private Float experience;
-    @Email
     @Column(name="emp_email")
     private String email;
     @Column(name="emp_DOB")
@@ -44,8 +42,8 @@ public class Employee {
     private String status;
     @Column(name="emp_join_date")
     private LocalDate joinDate;
-    @OneToMany(mappedBy = "employee")
-    private List<EmployeeProject> employeeProjects;
+//    @OneToMany(mappedBy = "employee")
+//    private List<EmployeeProject> employeeProjects;
     @OneToOne(cascade = CascadeType.ALL)
     private Payroll payroll;
     @Column(name="emp_left_date")

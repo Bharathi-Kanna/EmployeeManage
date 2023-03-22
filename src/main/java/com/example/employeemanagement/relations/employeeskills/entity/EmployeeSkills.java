@@ -1,6 +1,7 @@
 package com.example.employeemanagement.relations.employeeskills.entity;
-
 import jakarta.persistence.*;
+
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
