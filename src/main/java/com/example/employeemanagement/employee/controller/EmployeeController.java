@@ -1,5 +1,5 @@
 package com.example.employeemanagement.employee.controller;
-//vishnu prakas h N
+import com.example.employeemanagement.employee.response.FilterResponse;
 import com.example.employeemanagement.generics.ControllerInterface;
 import com.example.employeemanagement.employee.entity.Employee;
 import com.example.employeemanagement.relations.employeecertificate.entity.EmployeeCertificate;
@@ -79,5 +79,9 @@ public class EmployeeController implements ControllerInterface<Employee>{
     @GetMapping("/bySalary")
     public ResponseEntity<List<String>> sortBySalary(){
         return new ResponseEntity<>(employeeServices.sortBySalary(),HttpStatus.OK);
+    }
+    @GetMapping("/findWithFilter")
+    public ResponseEntity<List<EmployeeResponse>> findWithFilter(@RequestBody FilterResponse filterResponse){
+        return new ResponseEntity<>(employeeServices.findWithFilter(filterResponse),HttpStatus.OK);
     }
 }

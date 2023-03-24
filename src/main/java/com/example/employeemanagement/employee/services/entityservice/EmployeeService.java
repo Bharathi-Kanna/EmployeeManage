@@ -1,4 +1,5 @@
 package com.example.employeemanagement.employee.services.entityservice;
+import com.example.employeemanagement.employee.response.FilterResponse;
 import com.example.employeemanagement.exception.EntityNotFound;
 import com.example.employeemanagement.certificate.entity.Certificate;
 import com.example.employeemanagement.department.entity.Department;
@@ -20,7 +21,11 @@ import com.example.employeemanagement.skills.repository.SkillsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Service
 public class EmployeeService implements EmployeeServiceInterface  {
 
@@ -185,6 +190,94 @@ public class EmployeeService implements EmployeeServiceInterface  {
             }
         } );
     }
+
+    @Override
+    public List<EmployeeResponse> findWithFilter(FilterResponse filterResponse) {
+
+        List<EmployeeResponse> employeeResponseList=findAllEmployeeByEntityId(0L,"123");
+        List<EmployeeResponse> employeeResponseList1=skillFilter(filterResponse,employeeResponseList);
+        List<EmployeeResponse> employeeResponseList2=certificateFilter(filterResponse,employeeResponseList1);
+        List<EmployeeResponse> employeeResponseList3=experienceFilter(filterResponse,employeeResponseList2);
+        List<EmployeeResponse> employeeResponseList4=salaryFilter(filterResponse,employeeResponseList3);
+
+        return employeeResponseList4;
+    }
+
+    @Override
+    public List<EmployeeResponse> skillFilter(FilterResponse filterResponse, List<EmployeeResponse> employeeResponseList) {
+        if(filterResponse.getSkillIds().get(0)==0L) return employeeResponseList;
+        AtomicInteger tempCount= new AtomicInteger();
+        List<Long> skillIds= filterResponse.getSkillIds();
+        List<EmployeeResponse> employeeResponseList1=new ArrayList<>();
+        employeeResponseList.forEach(employeeResponse->{
+            tempCount.set(0);
+            if(employeeResponse.getEmployeeSkills()!=null){
+                employeeResponse.getEmployeeSkills().forEach(skills->{
+                    for(int i=0;i<skillIds.size();i++){
+                        if(skills.getSkillId()==skillIds.get(i)){
+                            tempCount.getAndIncrement();
+                        }
+                    }
+
+                });
+            }
+            if(tempCount.get()==skillIds.size()){
+                employeeResponseList1.add(employeeResponse);
+            }
+        });
+        return employeeResponseList1;
+    }
+
+
+    @Override
+    public List<EmployeeResponse> certificateFilter(FilterResponse filterResponse, List<EmployeeResponse> employeeResponseList) {
+        if(filterResponse.getCertificateIds().get(0)==0L) return employeeResponseList;
+        AtomicInteger tempCount= new AtomicInteger();
+        List<Long> certificateIds= filterResponse.getCertificateIds();
+        List<EmployeeResponse> employeeResponseList1=new ArrayList<>();
+        employeeResponseList.forEach(employeeResponse->{
+            tempCount.set(0);
+            if(employeeResponse.getEmployeeCertificate()==null){
+                employeeResponse.getEmployeeCertificate().forEach(certificate->{
+                    for(int i=0;i<certificateIds.size();i++){
+                        if(certificate.getCertificateId()==certificateIds.get(i)){
+                            tempCount.getAndIncrement();
+                        }
+                    }
+
+                });
+            }
+            if(tempCount.get()==certificateIds.size()){
+                employeeResponseList1.add(employeeResponse);
+            }
+        });
+        return employeeResponseList1;
+    }
+
+
+    @Override
+    public List<EmployeeResponse> salaryFilter(FilterResponse filterResponse, List<EmployeeResponse> employeeResponseList) {
+        List<EmployeeResponse> employeeResponseList1=new ArrayList<>();
+        employeeResponseList.forEach(employeeResponse -> {
+            if(employeeResponse.getPayroll().getSalary()>=filterResponse.getStartSalary() && employeeResponse.getPayroll().getSalary()<=filterResponse.getEndSalary()){
+                employeeResponseList1.add(employeeResponse);
+            }
+        });
+        return employeeResponseList1;
+    }
+
+    @Override
+    public List<EmployeeResponse> experienceFilter(FilterResponse filterResponse, List<EmployeeResponse> employeeResponseList) {
+
+        List<EmployeeResponse> employeeResponseList1=new ArrayList<>();
+        employeeResponseList.forEach(employeeResponse -> {
+            if(employeeResponse.getExperience()>=filterResponse.getStartExp() && employeeResponse.getExperience()<=filterResponse.getEndExp()){
+                employeeResponseList1.add(employeeResponse);
+            }
+        });
+        return employeeResponseList1;
+    }
+
 
     private EmployeeResponse findEmployeeResponse(Employee employee) {
         EmployeeResponse employeeResponse = new EmployeeResponse();
