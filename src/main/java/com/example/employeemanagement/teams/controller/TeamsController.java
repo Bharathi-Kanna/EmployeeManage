@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teams")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"Access-Control-Allow-Origin","Access-Control-Allow-Credentials"})
+
 public class TeamsController {
     @Autowired
     TeamsService teamsService;

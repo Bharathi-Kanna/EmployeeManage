@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/project")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"Access-Control-Allow-Origin","Access-Control-Allow-Credentials"})
 public class ProjectController {
     @Autowired
     ProjectService projectService;
