@@ -23,5 +23,6 @@ public class EmployeeTeam {
     private Long ratePerHour;
     private LocalDate startDate=LocalDate.now();
     private LocalDate endDate;
+    private LocalDate latestTimesheetGeneratedDate;
     private String employeeStatus="ACTIVE";
 }

@@ -28,7 +28,7 @@ public class EmployeeTeamService {
         employeeTeam.setEndDate(LocalDate.now());
         employeeTeam.setEmployeeStatus("INACTIVE");
     }
-    public List<EmployeeResponse> findALlEmployeeInTeam(Long id){
+    public List<EmployeeResponse> findAllEmployeeInTeam(Long id){
         List<EmployeeTeam> employeeTeamList=employeeTeamRepo.findByTeamId(id);
         List<EmployeeResponse> employeeResponseList=new ArrayList<>();
         employeeTeamList.forEach(employeeTeam -> {

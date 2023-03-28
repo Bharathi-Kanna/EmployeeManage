@@ -2,6 +2,8 @@ package com.example.employeemanagement.employee.controller;
 import com.example.employeemanagement.employee.response.FilterResponse;
 import com.example.employeemanagement.generics.ControllerInterface;
 import com.example.employeemanagement.employee.entity.Employee;
+import com.example.employeemanagement.relations.employeeTeam.entity.EmployeeTeam;
+import com.example.employeemanagement.relations.employeeTeam.service.EmployeeTeamService;
 import com.example.employeemanagement.relations.employeecertificate.entity.EmployeeCertificate;
 import com.example.employeemanagement.relations.employeeskills.entity.EmployeeSkills;
 import com.example.employeemanagement.employee.response.EmployeeResponse;
@@ -20,6 +22,8 @@ public class EmployeeController implements ControllerInterface<Employee>{
 
     @Autowired
     private EmployeeServiceInterface employeeServices;
+    @Autowired
+    private EmployeeTeamService employeeTeamService;
 
     @GetMapping("/findAll")
     public ResponseEntity<List<EmployeeResponse>> findAllEntityWithNames(@RequestParam(defaultValue = "1") Long id,@RequestParam(defaultValue = "EMP") String entity){
@@ -83,5 +87,13 @@ public class EmployeeController implements ControllerInterface<Employee>{
     @GetMapping("/findWithFilter")
     public ResponseEntity<List<EmployeeResponse>> findWithFilter(@RequestBody FilterResponse filterResponse){
         return new ResponseEntity<>(employeeServices.findWithFilter(filterResponse),HttpStatus.OK);
+    }
+    @PostMapping("/addEmployeeToTeam")
+    public ResponseEntity<EmployeeTeam> addEmployeeTeam(@RequestBody EmployeeTeam employeeTeam){
+        return new ResponseEntity<>(employeeTeamService.addEmployeeTeam(employeeTeam),HttpStatus.OK);
+    }
+    @GetMapping("/findEmployeeByTeam/{id}")
+    public ResponseEntity<List<EmployeeResponse>> findEmployeeTeam(@PathVariable Long id){
+        return new ResponseEntity<>(employeeTeamService.findAllEmployeeInTeam(id),HttpStatus.OK);
     }
 }

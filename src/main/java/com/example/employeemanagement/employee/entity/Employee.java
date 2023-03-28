@@ -43,7 +43,7 @@ public class Employee {
     @Column(name="emp_join_date")
     private LocalDate joinDate;
 //    @OneToMany(mappedBy = "employee")
-//    private List<EmployeeProject> employeeProjects;
+//      private List<EmployeeProject> employeeProjects;
     @OneToOne(cascade = CascadeType.ALL)
     private Payroll payroll;
     @Column(name="emp_left_date")
