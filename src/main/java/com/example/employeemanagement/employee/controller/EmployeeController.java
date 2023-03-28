@@ -96,4 +96,9 @@ public class EmployeeController implements ControllerInterface<Employee>{
     public ResponseEntity<List<EmployeeResponse>> findEmployeeTeam(@PathVariable Long id){
         return new ResponseEntity<>(employeeTeamService.findAllEmployeeInTeam(id),HttpStatus.OK);
     }
+    @PutMapping("/removeEmployee/{id}")
+    public ResponseEntity<HttpStatus>removeEmployeeTeam(@PathVariable Long id){
+            employeeTeamService.removeEmployee(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
