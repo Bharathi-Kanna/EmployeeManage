@@ -80,7 +80,7 @@ public class EmployeeController implements ControllerInterface<Employee>{
     public ResponseEntity<List<String>> sortBySalary(){
         return new ResponseEntity<>(employeeServices.sortBySalary(),HttpStatus.OK);
     }
-    @GetMapping("/findWithFilter")
+    @PostMapping("/findWithFilter")
     public ResponseEntity<List<EmployeeResponse>> findWithFilter(@RequestBody FilterResponse filterResponse){
         return new ResponseEntity<>(employeeServices.findWithFilter(filterResponse),HttpStatus.OK);
     }

@@ -237,7 +237,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
         List<EmployeeResponse> employeeResponseList1=new ArrayList<>();
         employeeResponseList.forEach(employeeResponse->{
             tempCount.set(0);
-            if(employeeResponse.getEmployeeCertificate()==null){
+            if(employeeResponse.getEmployeeCertificate()!=null){
                 employeeResponse.getEmployeeCertificate().forEach(certificate->{
                     for(int i=0;i<certificateIds.size();i++){
                         if(certificate.getCertificateId()==certificateIds.get(i)){
