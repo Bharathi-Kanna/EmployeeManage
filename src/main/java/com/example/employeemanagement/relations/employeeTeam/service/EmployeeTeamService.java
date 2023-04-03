@@ -27,12 +27,15 @@ public class EmployeeTeamService {
         EmployeeTeam employeeTeam= employeeTeamRepo.findById(id).orElseThrow(() -> new EntityNotFound("employeeTeam not found " + id));
         employeeTeam.setEndDate(LocalDate.now());
         employeeTeam.setEmployeeStatus("INACTIVE");
+        employeeTeamRepo.save(employeeTeam);
     }
     public List<EmployeeResponse> findAllEmployeeInTeam(Long id){
         List<EmployeeTeam> employeeTeamList=employeeTeamRepo.findByTeamId(id);
         List<EmployeeResponse> employeeResponseList=new ArrayList<>();
         employeeTeamList.forEach(employeeTeam -> {
             EmployeeResponse employeeResponse=employeeService.findEntityByIdWithNames(employeeTeam.getEmployeeId());
+            employeeResponse.setEmployeeTeamId(employeeTeam.getId());
+            if(employeeTeam.getEmployeeStatus()=="ACTIVE")
             employeeResponseList.add(employeeResponse);
         });
         return employeeResponseList;
