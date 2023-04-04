@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EmployeeSkillsRepo extends JpaRepository<EmployeeSkills,Long> {
-    List<EmployeeSkills> findByEmployeeId(Long Id);
-    List<EmployeeSkills> findBySkillId(Long Id);
+    List<EmployeeSkills> findByEmployeeId(Long id);
+    List<EmployeeSkills> findBySkillId(Long id);
 }

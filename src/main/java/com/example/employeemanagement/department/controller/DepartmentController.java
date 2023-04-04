@@ -31,14 +31,14 @@ public class DepartmentController implements ControllerInterface<Department> {
             DepartmentResponse eResponse = new DepartmentResponse(e);
             responseList.add(eResponse);
         });
-        return new ResponseEntity<List<DepartmentResponse>>(responseList, HttpStatus.OK) ;
+        return new ResponseEntity<>(responseList, HttpStatus.OK) ;
     }
 
 
     @GetMapping("/findById/{id}")
     @Override
     public ResponseEntity<Department> findEntityById(@PathVariable Long id) {
-        return new ResponseEntity(departmentService.findEntityById(id),HttpStatus.OK);
+        return new ResponseEntity<>(departmentService.findEntityById(id),HttpStatus.OK);
     }
     @PostMapping("/add")
     @Override
@@ -54,6 +54,6 @@ public class DepartmentController implements ControllerInterface<Department> {
     @Override
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") Long id) {
         departmentService.deleteById(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

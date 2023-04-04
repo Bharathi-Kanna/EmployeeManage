@@ -35,6 +35,6 @@ public class CertificateService implements CertificateServiceInterface {
     }
     @Override
     public void deleteById(Long id) {
-
+//        override
     }
 }

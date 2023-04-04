@@ -32,7 +32,8 @@ public class EmployeeResponse  {
     private String status;
     private LocalDate joinDate;
     private LocalDate leftDate;
-    private Long EmployeeTeamId;
+    private Long employeeTeamId;
+
 
 
 }

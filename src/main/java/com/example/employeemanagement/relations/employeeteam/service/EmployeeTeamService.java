@@ -1,11 +1,9 @@
-package com.example.employeemanagement.relations.employeeTeam.service;
-
-
+package com.example.employeemanagement.relations.employeeteam.service;
 import com.example.employeemanagement.employee.response.EmployeeResponse;
 import com.example.employeemanagement.employee.services.entityservice.EmployeeService;
 import com.example.employeemanagement.exception.EntityNotFound;
-import com.example.employeemanagement.relations.employeeTeam.entity.EmployeeTeam;
-import com.example.employeemanagement.relations.employeeTeam.repository.EmployeeTeamRepo;
+import com.example.employeemanagement.relations.employeeteam.entity.EmployeeTeam;
+import com.example.employeemanagement.relations.employeeteam.repository.EmployeeTeamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +33,16 @@ public class EmployeeTeamService {
         employeeTeamList.forEach(employeeTeam -> {
             EmployeeResponse employeeResponse=employeeService.findEntityByIdWithNames(employeeTeam.getEmployeeId());
             employeeResponse.setEmployeeTeamId(employeeTeam.getId());
-            if(employeeTeam.getEmployeeStatus()=="ACTIVE")
-            employeeResponseList.add(employeeResponse);
+            if(employeeTeam.getEmployeeStatus().equals("ACTIVE")) {
+                employeeResponseList.add(employeeResponse);
+            }
         });
         return employeeResponseList;
+    }
+    public void updateEmployeeRatePerHour(Long id,Long ratePerHour){
+        EmployeeTeam employeeTeam=employeeTeamRepo.findById(id).orElseThrow(() -> new EntityNotFound("employeeTeam not found " + id));
+        employeeTeam.setRatePerHour(ratePerHour);
+        employeeTeamRepo.save(employeeTeam);
     }
 
 }

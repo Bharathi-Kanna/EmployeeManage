@@ -1,7 +1,6 @@
 package com.example.employeemanagement.designation.controller;
 
-import com.example.employeemanagement.department.entity.Department;
-import com.example.employeemanagement.department.response.DepartmentResponse;
+
 import com.example.employeemanagement.designation.response.DesignationResponse;
 import com.example.employeemanagement.generics.ControllerInterface;
 import com.example.employeemanagement.designation.entity.Designation;
@@ -34,7 +33,7 @@ public class DesignationController implements ControllerInterface<Designation> {
             DesignationResponse eResponse = new DesignationResponse(e);
             responseList.add(eResponse);
         });
-        return new ResponseEntity<List<DesignationResponse>>(responseList, HttpStatus.OK) ;
+        return new ResponseEntity<>(responseList, HttpStatus.OK) ;
     }
 
     @GetMapping("/findById/{id}")
@@ -56,6 +55,6 @@ public class DesignationController implements ControllerInterface<Designation> {
     @Override
     public ResponseEntity<HttpStatus> deleteById( @PathVariable("id") Long id) {
         designationService.deleteById(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

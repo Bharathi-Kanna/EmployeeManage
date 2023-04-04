@@ -1,4 +1,4 @@
-package com.example.employeemanagement.relations.employeeTeam.entity;
+package com.example.employeemanagement.relations.employeeteam.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +23,6 @@ public class EmployeeTeam {
     private Long ratePerHour;
     private LocalDate startDate=LocalDate.now();
     private LocalDate endDate;
-    private LocalDate latestTimesheetGeneratedDate;
+    private LocalDate latestTimesheetGeneratedDate=LocalDate.now();
     private String employeeStatus="ACTIVE";
 }

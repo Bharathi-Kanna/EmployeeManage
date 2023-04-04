@@ -2,6 +2,7 @@ package com.example.employeemanagement.payroll.services.entityservice;
 import com.example.employeemanagement.payroll.entity.Payroll;
 import com.example.employeemanagement.payroll.repository.PayrollRepo;
 import com.example.employeemanagement.payroll.services.serviceinterface.PayrollServiceInterface;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,7 +21,7 @@ public class PayrollService implements PayrollServiceInterface {
     }
     @Override
     public List<Payroll> findAllEntity() {
-        return null;
+        return Collections.emptyList();
     }
     @Override
     public Payroll findEntityById(Long id) {
@@ -28,6 +29,6 @@ public class PayrollService implements PayrollServiceInterface {
     }
     @Override
     public void deleteById(Long id) {
-
+//override
     }
 }

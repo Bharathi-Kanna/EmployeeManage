@@ -2,7 +2,6 @@ package com.example.employeemanagement.project.services;
 
 import com.example.employeemanagement.designation.entity.Designation;
 import com.example.employeemanagement.designation.repository.DesignationRepo;
-import com.example.employeemanagement.designation.services.service.DesignationService;
 import com.example.employeemanagement.exception.EntityNotFound;
 import com.example.employeemanagement.project.entity.Project;
 import com.example.employeemanagement.project.repository.ProjectRepo;

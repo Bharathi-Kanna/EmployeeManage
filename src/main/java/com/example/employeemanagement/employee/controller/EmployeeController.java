@@ -2,8 +2,8 @@ package com.example.employeemanagement.employee.controller;
 import com.example.employeemanagement.employee.response.FilterResponse;
 import com.example.employeemanagement.generics.ControllerInterface;
 import com.example.employeemanagement.employee.entity.Employee;
-import com.example.employeemanagement.relations.employeeTeam.entity.EmployeeTeam;
-import com.example.employeemanagement.relations.employeeTeam.service.EmployeeTeamService;
+import com.example.employeemanagement.relations.employeeteam.entity.EmployeeTeam;
+import com.example.employeemanagement.relations.employeeteam.service.EmployeeTeamService;
 import com.example.employeemanagement.relations.employeecertificate.entity.EmployeeCertificate;
 import com.example.employeemanagement.relations.employeeskills.entity.EmployeeSkills;
 import com.example.employeemanagement.employee.response.EmployeeResponse;
@@ -59,7 +59,7 @@ public class EmployeeController implements ControllerInterface<Employee>{
     @Override
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") Long id) {
         employeeServices.deleteById(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/addSkills")
     public ResponseEntity<EmployeeSkills> addSkills(@RequestBody EmployeeSkills employeeSkills){
@@ -99,6 +99,11 @@ public class EmployeeController implements ControllerInterface<Employee>{
     @PutMapping("/removeEmployee/{id}")
     public ResponseEntity<HttpStatus>removeEmployeeTeam(@PathVariable Long id){
             employeeTeamService.removeEmployee(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PutMapping("updateRatePerHour/{id}/{ratePerHour}")
+    public ResponseEntity<HttpStatus> updateRatePerHour(@PathVariable("id") Long id,@PathVariable("ratePerHour") Long ratePerHour ){
+        employeeTeamService.updateEmployeeRatePerHour(id,ratePerHour);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

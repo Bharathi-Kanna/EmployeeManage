@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -42,8 +42,6 @@ public class Employee {
     private String status;
     @Column(name="emp_join_date")
     private LocalDate joinDate;
-//    @OneToMany(mappedBy = "employee")
-//      private List<EmployeeProject> employeeProjects;
     @OneToOne(cascade = CascadeType.ALL)
     private Payroll payroll;
     @Column(name="emp_left_date")

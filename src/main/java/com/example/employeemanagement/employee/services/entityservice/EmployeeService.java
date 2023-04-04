@@ -21,8 +21,6 @@ import com.example.employeemanagement.skills.repository.SkillsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -96,7 +94,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
 
     @Override
     public Employee addEntity(Employee employee){
-       if(!(employee.getPayroll()==null))
+       if((employee.getPayroll()!=null))
            employee.getPayroll().setTotalSalary(employee.getPayroll().getSalary()+employee.getPayroll().getBonus());
         return employeeRepo.save(employee);
     }
@@ -128,7 +126,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
             List<Employee> employeeList1 = new ArrayList<>();
             employeeList.forEach(employee -> {
                 String string = employee.getStatus();
-                if((string).equals((String)entity)){
+                if((string).equals(entity)){
                     employeeList1.add(employee);
                 }
             });
@@ -155,9 +153,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
         else
             employees = employeeRepo.findAll();
 
-        employees.forEach((employee)->{
-            employeeResponseList.add(findEmployeeResponse(employee));
-        });
+        employees.forEach(employee-> employeeResponseList.add(findEmployeeResponse(employee)));
         return employeeResponseList ;
     }
 
@@ -173,9 +169,8 @@ public class EmployeeService implements EmployeeServiceInterface  {
     @Override
     public void deleteEmployeeSkills(Long empId, Long skillId) {
         List<EmployeeSkills> employeeSkillsList = employeeSkillsRepo.findByEmployeeId(empId);
-        EmployeeSkills employeeSkill=new EmployeeSkills();
         employeeSkillsList.forEach(employeeSkills -> {
-            if(employeeSkills.getSkillId()==skillId){
+            if(employeeSkills.getSkillId().equals(skillId)){
                 employeeSkillsRepo.deleteById(employeeSkills.getEmployeeSkillId());
             }
         });
@@ -183,9 +178,8 @@ public class EmployeeService implements EmployeeServiceInterface  {
     @Override
     public void deleteEmployeeCertificate(Long empId, Long certificateId) {
         List<EmployeeCertificate> employeeCertificateList = employeeCertificateRepo.findByEmployeeId(empId);
-        EmployeeCertificate employeeCertificate  =new EmployeeCertificate();
         employeeCertificateList.forEach(employeeCertificates ->{
-            if(employeeCertificates.getCertificateId()==certificateId){
+            if(employeeCertificates.getCertificateId().equals(certificateId)){
                 employeeCertificateRepo.deleteById(employeeCertificates.getEmployeeCertificateId());
             }
         } );
@@ -198,9 +192,9 @@ public class EmployeeService implements EmployeeServiceInterface  {
         List<EmployeeResponse> employeeResponseList1=skillFilter(filterResponse,employeeResponseList);
         List<EmployeeResponse> employeeResponseList2=certificateFilter(filterResponse,employeeResponseList1);
         List<EmployeeResponse> employeeResponseList3=experienceFilter(filterResponse,employeeResponseList2);
-        List<EmployeeResponse> employeeResponseList4=salaryFilter(filterResponse,employeeResponseList3);
 
-        return employeeResponseList4;
+
+        return salaryFilter(filterResponse,employeeResponseList3);
     }
 
     @Override
@@ -214,7 +208,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
             if(employeeResponse.getEmployeeSkills()!=null){
                 employeeResponse.getEmployeeSkills().forEach(skills->{
                     for(int i=0;i<skillIds.size();i++){
-                        if(skills.getSkillId()==skillIds.get(i)){
+                        if(skills.getSkillId().equals(skillIds.get(i))){
                             tempCount.getAndIncrement();
                         }
                     }
@@ -240,7 +234,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
             if(employeeResponse.getEmployeeCertificate()!=null){
                 employeeResponse.getEmployeeCertificate().forEach(certificate->{
                     for(int i=0;i<certificateIds.size();i++){
-                        if(certificate.getCertificateId()==certificateIds.get(i)){
+                        if(certificate.getCertificateId().equals(certificateIds.get(i))){
                             tempCount.getAndIncrement();
                         }
                     }

@@ -31,6 +31,6 @@ public class TeamsController {
     @DeleteMapping ("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") Long id) {
         teamsService.deleteById(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
