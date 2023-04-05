@@ -33,6 +33,7 @@ public class EmployeeTeamService {
         employeeTeamList.forEach(employeeTeam -> {
             EmployeeResponse employeeResponse=employeeService.findEntityByIdWithNames(employeeTeam.getEmployeeId());
             employeeResponse.setEmployeeTeamId(employeeTeam.getId());
+            employeeResponse.setRatePerHour(employeeTeam.getRatePerHour());
             if(employeeTeam.getEmployeeStatus().equals("ACTIVE")) {
                 employeeResponseList.add(employeeResponse);
             }

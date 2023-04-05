@@ -33,6 +33,7 @@ public class EmployeeResponse  {
     private LocalDate joinDate;
     private LocalDate leftDate;
     private Long employeeTeamId;
+    private Long ratePerHour;
 
 
 

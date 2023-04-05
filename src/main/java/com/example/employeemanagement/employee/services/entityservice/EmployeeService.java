@@ -112,7 +112,7 @@ public class EmployeeService implements EmployeeServiceInterface  {
     public List<EmployeeResponse> findAllEmployeeByEntityId(Long id,String entity) {
 
         List<EmployeeResponse> employeeResponseList =new ArrayList<>();
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employees ;
 
         if(entity.equals("DEP"))
             employees = employeeRepo.findByDepartmentId(id);
